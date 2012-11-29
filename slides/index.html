@@ -52,14 +52,32 @@
 
 				<section>
 					<section>
+						<h1>About Version Control</h1>
+					</section>
+					<section>
+						<h3>Centralized Version Control Systems</h3>
+						<img src="http://git-scm.com/figures/18333fig0102-tn.png">
+					</section>
+					<section>
+						<h3>Distributed Version Control Systems</h3>
+						<img src="http://git-scm.com/figures/18333fig0103-tn.png">
+					</section>
+					<section>
+						<h3>The Three States</h3>
+						<img src="http://git-scm.com/figures/18333fig0106-tn.png">
+					</section>
+				</section>
+
+				<section>
+					<section>
 						<h1>Setup</h1>
 					</section>
 					
 					<section data-markdown>
 						<h3>Setup Name and Email</h3>
 						<pre><code contenteditable>
-							git config --global core.autocrlf input
-							git config --global core.safecrlf true
+git config --global user.name "Your Name"
+git config --global user.email "your_email@whatever.com"
 
 						</code></pre>						
 						<aside class="notes"></aside>
@@ -165,6 +183,245 @@ $ git status
 #	modified:   index.html
 #
 						</code></pre>						
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Staging and Commiting</h1>
+					</section>
+					<section>
+						<pre><code contenteditable>
+$ git add a.js
+$ git add b.js
+$ git commit -m "Changes for a and b"
+
+$ git add c.js
+$ git commit -m "Unrelated change to c"
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Committing Changes</h1>
+					</section>
+					<section>
+						<pre><code contenteditable>
+GIT_EDITOR environment variable
+core.editor configuration setting
+VISUAL environment variable
+EDITOR environment variable
+						</code></pre>
+					</section>
+
+					<section>
+						<pre><code contenteditable>
+$ ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+$ export EDITOR='subl -w'
+						</code></pre>
+					</section>
+
+					<section>
+						<pre><code>
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   hello.js
+#
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Changes, Not Files</h1>
+						<p>git works with changes, not files.</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>History</h1>
+					</section>
+
+					<section>
+						<pre><code>
+git log
+						</code></pre>
+					</section>
+					<section>
+						<pre><code>
+git log --pretty=oneline
+						</code></pre>
+					</section>
+					<section>
+						<pre><code>
+$ git log --pretty=oneline --max-count=2
+$ git log --pretty=oneline --since='5 minutes ago'
+$ git log --pretty=oneline --until='5 minutes ago'
+$ git log --pretty=oneline --author=<your name>
+$ git log --pretty=oneline --all
+						</code></pre>
+					</section>
+					<section>
+						<pre><code>
+git log --all --pretty=format:"%h %cd %s (%an)" --since='7 days ago'
+						</code></pre>
+					</section>
+					<section>
+						<pre><code>
+git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
+						</code></pre>
+					</section>
+					<section>
+						<pre><code>
+--pretty="..." defines the format of the output.
+%h is the abbreviated hash of the commit
+%d are any decorations on that commit (e.g. branch heads or tags)
+%ad is the author date
+%s is the comment
+%an is the author name
+--graph informs git to display the commit tree in an ASCII graph layout
+--date=short keeps the date format nice and short
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Aliases</h1>
+					</section>
+					<section>
+						<p>git status, git add, git commit, and git checkout are such common commands that it is useful to have abbreviations for them. Add the following to the .gitconfig file in your $HOME directory.</p>
+					</section>
+					<section>
+						<pre><code>
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Tagging Versions</h1>
+					</section>
+					<section>
+						<pre><code>
+$ git tag v1
+  						</code></pre>
+					</section>
+					<section>
+						<pre><code>
+$ git hist master --all
+  						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Undoing Local Changes</h1>
+					</section>
+					<section>
+						<pre><code>
+$ git checkout <file>
+  						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Undoing Staged Changes</h1>
+					</section>
+					<section>
+						<pre><code>
+$ git reset HEAD <file>
+$ git checkout <file>
+  						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Undoing Commited Changes</h1>
+					</section>
+					<section>
+						<pre><code>
+$ git revert HEAD
+$ git revert HEAD --no-edit
+  						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Removing Commits From a Branch</h1>
+					</section>
+					<section>
+						<pre><code>
+$ git reset --hard v1
+$ git hist
+  						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Ammending Commits</h1>
+					</section>
+					<section>
+						<h3>Change the program then commit</h3>
+						<pre><code>
+$ git add <file>
+$ git commit -m "Add an author comment"
+  						</code></pre>						
+					</section>
+					<section>
+						<h3>Update the program</h3>
+					</section>
+					<section>
+						<h3>Amend the Previous Commit</h3>
+						<pre><code>
+$ git add <file>
+$ git commit --amend -m "Add an author/email comment"
+  						</code></pre>						
+					</section>
+					<section>
+						<h3>Review the History</h3>
+						<pre><code>
+$ git hist
+  						</code></pre>						
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Moving files</h1>
+					</section>
+					<section>
+						<h3>Move a <file> into a lib directory.</h3>
+						<pre><code>
+$ mkdir lib
+$ git mv <file> lib
+$ git status
+  						</code></pre>
+					</section>
+
+					<section>
+						<h3>Another way of moving files</h3>
+						<pre><code>
+$ mkdir lib
+$ mv <file> lib
+$ git add lib/<file>
+$ git rm <file>
+  						</code></pre>
 					</section>
 				</section>
 
